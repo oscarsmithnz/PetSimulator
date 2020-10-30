@@ -7,6 +7,7 @@ package interactions;
 
 import Client.VirtualPetClient;
 import cats.Cat;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -137,6 +138,24 @@ public class CatManager {
         } else {
             System.out.println("Cat summary: \n" + cat.toString());
         }
+//        try{
+//        System.out.println(sizeof(cat));
+//            
+//        }catch(IOException e){
+//            System.out.println("e");
+//        }
+    }
+    
+    //test max size of object for database object size (saving serial)
+    private static int sizeof(Cat c) throws IOException{
+        ByteArrayOutputStream bout = new ByteArrayOutputStream();
+        ObjectOutputStream oos = new ObjectOutputStream(bout);
+        
+        oos.writeObject(c);
+        oos.flush();
+        oos.close();
+        
+        return bout.toByteArray().length;
     }
 
     /*

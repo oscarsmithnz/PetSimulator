@@ -163,6 +163,10 @@ public abstract class Cat implements Serializable {
         return name;
     }
 
+    public int getAge(){
+        return age;
+    }
+    
     public void setName(String n) {
         this.name = n;
     }
