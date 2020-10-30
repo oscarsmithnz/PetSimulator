@@ -33,17 +33,14 @@ public class VirtualPetClient implements Runnable{
 
     public void play(){
         manager.play();
-        gui.updateCatStats();
     }
     
     public void eat(){
         manager.eat();
-        gui.updateCatStats();
     }
     
     public void sleep(){
         manager.sleep();
-        gui.updateCatStats();
     }
     
     public void run(){
@@ -66,6 +63,14 @@ public class VirtualPetClient implements Runnable{
         return temp;
     }
 
+    public boolean saveCat(){
+        return manager.saveCat();
+    }
+    
+    public CatManager getManager(){
+        return manager;
+    }
+    
     //method for gui to get cats saved in database.
     public String[] getMyCats() {
         return database.getPets();

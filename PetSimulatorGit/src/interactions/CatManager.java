@@ -18,7 +18,6 @@ import cats.Cat;
 public class CatManager {
 
     private Cat cat;
-    private static final String filePath = "MyCats";
 
     public CatManager() {
     }

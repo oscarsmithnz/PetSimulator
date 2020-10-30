@@ -5,6 +5,7 @@
  */
 package Client;
 //test
+
 import cats.Cat;
 import interactions.CatManager;
 import java.awt.Color;
@@ -36,8 +37,10 @@ import javax.swing.SwingConstants;
  * @author Ashley ddb1062
  */
 public class ClientGUI extends JFrame {
+
     VirtualPetClient client;
     String screen = "Main menu";
+    private Cat cat;
 
     public ClientGUI(String title, VirtualPetClient vpc) {
         super(title);
@@ -59,9 +62,9 @@ public class ClientGUI extends JFrame {
         Font font = null;
 
         try {
-            font = Font.createFont(Font.TRUETYPE_FONT, new File("thisOne.ttf")).deriveFont(50f);
+            font = Font.createFont(Font.TRUETYPE_FONT, new File("images/thisOne.ttf")).deriveFont(50f);
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("thisOne.ttf")));
+            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("images/thisOne.ttf")));
 
         } catch (IOException | FontFormatException e) {
 
@@ -118,25 +121,25 @@ public class ClientGUI extends JFrame {
         button.setVisible(true);
         getContentPane().add(button);
 
-        JTextField info = new JTextField();
+        JTextArea info = new JTextArea();
         info.setEditable(false);
 
         JScrollPane stats = new JScrollPane(info,
-                                ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
-                                ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-                        stats.setLocation(275, 100);
-                        stats.setSize(200, 200);
-                        javax.swing.border.Border border = BorderFactory.createLineBorder(Color.BLACK, 5);
-                        stats.setBorder(border);
-                        stats.setVisible(false);
-                        getContentPane().add(stats);
+                ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
+                ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        stats.setLocation(275, 100);
+        stats.setSize(200, 200);
+        javax.swing.border.Border border = BorderFactory.createLineBorder(Color.BLACK, 5);
+        stats.setBorder(border);
+        stats.setVisible(false);
+        getContentPane().add(stats);
 
         JTextField IDSelect = new JTextField("Type cat ID");
         IDSelect.setSize(100, 25);
         IDSelect.setLocation(275, 300);
         IDSelect.setVisible(false);
         getContentPane().add(IDSelect);
-        
+
         IDSelect.addFocusListener(new FocusListener() {
             @Override
             public void focusGained(FocusEvent e) {
@@ -150,17 +153,17 @@ public class ClientGUI extends JFrame {
                 }
             }
         });
-        
+
         JTextArea adoptedCats = new JTextArea();
         adoptedCats.setEditable(false);
-        
+
         JScrollPane scroll = new JScrollPane(adoptedCats,
-                                ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
-                                ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-                        scroll.setLocation(275, 100);
-                        scroll.setSize(200, 200);
-                        scroll.setVisible(false);
-                        getContentPane().add(scroll);
+                ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
+                ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        scroll.setLocation(275, 100);
+        scroll.setSize(200, 200);
+        scroll.setVisible(false);
+        getContentPane().add(scroll);
 
         button.addActionListener(new ActionListener() {
             @Override
@@ -181,19 +184,15 @@ public class ClientGUI extends JFrame {
                         //client.getMyCats();
                         //TODO: implement showing cats in gui, select cat from menu
                         scroll.setVisible(true);
-                        
-                        
+
                         for (String myCat : client.getMyCats()) {
                             adoptedCats.append(myCat);
                             adoptedCats.append("\n");
                         }
-                        
-                        
-                        
 
                     } else if (selected == 1) {
                         //go to shelter
-                        image1.setIcon(new ImageIcon("src/GUI/shelter.png"));
+                        image1.setIcon(new ImageIcon("images/unnamed.gif"));
                         screen = "shelter";
                         welcome.setText("The Cat Shelter");
                         shelter.setVisible(true);
@@ -219,11 +218,15 @@ public class ClientGUI extends JFrame {
                         screen = "adopt";
 
                         stats.setVisible(true);
+                        info.selectAll();
+                        info.replaceSelection("");
+                        cat = client.adoptNewCat();
+                        info.append(cat.toString());
 
                     } else if (selected == 1) {
                         //TODO
                         //go to home screen
-                        image1.setIcon(new ImageIcon("src/GUI/capture.PNG"));
+                        image1.setIcon(new ImageIcon("images/catOnRoof.JPEG"));
                         menu.setVisible(true);
                         shelter.setVisible(false);
                         welcome.setText("Welcome to Cat Manager!");
@@ -232,19 +235,25 @@ public class ClientGUI extends JFrame {
                     }
                 } else if (screen.equals("adopt")) {
                     selected = adopt.getSelectedIndex();
-                    // show info in stats JTextField
+
                     if (selected == 0) {
                         //TODO
                         //add cat to collection
+                        client.getManager().setCat(cat);
+                        client.saveCat();
 
                     } else if (selected == 1) {
                         //TODO
                         //present another cat's info in stats JTextField
+                        info.selectAll();
+                        info.replaceSelection("");
+                        cat = client.adoptNewCat();
+                        info.append(cat.toString());
 
                     } else if (selected == 2) {
                         //TODO
                         //go to home screen
-                        image1.setIcon(new ImageIcon("src/GUI/capture.PNG"));
+                        image1.setIcon(new ImageIcon("images/catOnRoof.JPEG"));
                         menu.setVisible(true);
                         stats.setVisible(false);
                         shelter.setVisible(false);
@@ -255,30 +264,81 @@ public class ClientGUI extends JFrame {
 
                     }
                 } else if (screen.equals("cats")) {
-                   selected = myCats.getSelectedIndex();
-                   info.setText(catLoader(Integer.parseInt(IDSelect.getText()))); 
-                   stats.setVisible(true);
-                   IDSelect.setVisible(false);
-                   myCats.setVisible(true);
-                   myCats.setLocation(275,300);
-                   adoptedCats.setVisible(false);
-                   scroll.setVisible(false);
+                    //selecting a cat to interact with
+
+                    cat = client.loadCat(Integer.parseInt(IDSelect.getText()));
+                    info.selectAll();
+                    info.replaceSelection("");
+                    info.append(cat.toString());
+                    stats.setVisible(true);
+                    IDSelect.setVisible(false);
+                    myCats.setVisible(true);
+                    myCats.setLocation(275, 300);
+                    adoptedCats.setVisible(false);
+                    scroll.setVisible(false);
+
+                    screen = "interaction";
+                } else if (screen.equals("interaction")) {
+                    selected = myCats.getSelectedIndex();
 
                     if (selected == 0) {
-                        //play
-                        //update stats
+                        //play and updates stats
+                        cat.play();
+
+                        //clears screen
+                        info.selectAll();
+                        info.replaceSelection("");
+                        info.append("\"You play with \n" + cat.getName() + ".\"\n");
+                        if (!cat.play()) {
+                            info.append("Your cat has died. \nRest in peace " + cat.getName() + "\nCat summary: \n" + cat.toString());
+                        } else {
+                            info.append("Cat summary: \n" + cat.toString());
+                        }
+
                     } else if (selected == 1) {
-                        //eat
-                        //update stats
+                        //eats and updates stats
+                        cat.eat();
+
+                        //clear screen
+                        info.selectAll();
+                        info.replaceSelection("");
+                        info.append("   ۸     ۸         \n"
+                                + "ⴈ (=ﹾ ﻨﹾ =)    (  (  (\n"
+                                + "| |      |     )  )  )    \n"
+                                + "| ( ﮟ   ﮟ )    >+++°>\n"
+                                + "    ͝͝     ͝  "
+                                + "\nYou feed " + cat.getName() + ".");
+                        if (!cat.eat()) {
+                            info.append("\nYour cat has died. Rest in peace " + cat.getName()
+                                    + "\nCat summary: \n" + cat.toString());
+                        } else {
+                            info.append("\nCat summary: \n" + cat.toString());
+                        }
+
                     } else if (selected == 2) {
-                        //sleep
-                        //update stats
+                        //sleeps and updates stats
+                        cat.sleep();
+                        info.selectAll();
+                        info.replaceSelection("");
+                        info.append("Zzzzz      |\\      _,,,--,,_\n"
+                                + "           /,`.-'`'   ._  \\-;;,_\n"
+                                + "           |,4-  ) )_   .;.(  `'-'\n"
+                                + "           '---''(_/._)-'(_\\_)"
+                                + "You give " + cat.getName() + " a rest.");
+                        if (!cat.sleep()) {
+                            info.append("Your cat has died. Rest in peace " + cat.getName()
+                                    + "\nCat summary: \n" + cat.toString());
+                        } else {
+                            info.append("Cat summary: \n" + cat.toString());
+                        }
+
                     } else if (selected == 3) {
                         //save
+                        client.saveCat();
 
                     } else if (selected == 4) {
                         //go to home screen
-                        image1.setIcon(new ImageIcon("petsimulator/petsimulatorgit/images/capture.PNG"));
+                        image1.setIcon(new ImageIcon("images/catOnRoof.JPEG"));
                         menu.setVisible(true);
                         stats.setVisible(false);
                         shelter.setVisible(false);
@@ -292,16 +352,8 @@ public class ClientGUI extends JFrame {
         );
     }
 
-    public void updateCatStats() {
-        Cat current = client.getCat();
-        //TODO: print cat elements onto gui
-    }
-    
-    public String catLoader(int id){
-        Cat cat = client.loadCat(id);
-        
-       String text = cat.toString();
-       return text;
-                
-    }
+//    public void updateCatStats() {
+//        Cat current = client.getCat();
+//        //TODO: print cat elements onto gui
+//    }
 }

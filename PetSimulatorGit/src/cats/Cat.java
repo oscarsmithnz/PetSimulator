@@ -136,9 +136,9 @@ public abstract class Cat implements Serializable {
     used by the different breed subclasses to build their toString after adding their breed.
     */
     public String toString(){
-        String out = ", weighing " + String.format("%.1f", weight) + " kgs.\n"
-                + name + " is " + age + " years old, and is at " + happiness + "/100 happiness, "
-                + hunger + "/100 hunger, " + "and " + sleepiness + "/100 sleepiness.";
+        String out = ",\n weighing " + String.format("%.1f", weight) + " kgs.\n"
+                + name + " is " + age + " years old and is at\n " + happiness + "/100 happiness,\n "
+                + hunger + "/100 hunger, \n" + "and " + sleepiness + "/100 sleepiness.\n";
         
         return out;
     }
