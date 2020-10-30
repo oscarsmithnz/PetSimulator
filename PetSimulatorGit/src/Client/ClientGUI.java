@@ -236,6 +236,13 @@ public class ClientGUI extends JFrame {
         );
     }
     
+    //multithreading, allowing you to have multiple clients open at once to interact with multiple pets at once
+    public void addNewClient(){
+        VirtualPetClient newClient = new VirtualPetClient();
+        Thread thread = new Thread(newClient);
+        thread.run();
+    }
+    
     public void updateCatStats(){
         Cat current = client.getCat();
         //TODO: print cat elements onto gui

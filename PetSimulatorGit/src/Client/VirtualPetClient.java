@@ -7,7 +7,6 @@ package Client;
 
 import cats.*;
 import interactions.CatManager;
-import java.util.Scanner;
 
 /**
  *
@@ -15,7 +14,7 @@ import java.util.Scanner;
  *
  * the client that is run to use the program.
  */
-public class VirtualPetClient {
+public class VirtualPetClient implements Runnable{
 
     private VirtualPetDatabase database;
     private CatManager manager;
@@ -23,13 +22,13 @@ public class VirtualPetClient {
 
     public VirtualPetClient() {
         database = VirtualPetDatabase.getInstance();
-        manager = new CatManager(this);
+        manager = new CatManager();
+        gui = new ClientGUI("Pet Simulator", this);
     }
 
     public static void main(String[] args) {
         VirtualPetClient client = new VirtualPetClient();
-        client.gui = new ClientGUI("Pet Simulator", client);
-        client.gui.setVisible(true);
+        client.run();
     }
 
     public void play(){
@@ -37,6 +36,19 @@ public class VirtualPetClient {
         gui.updateCatStats();
     }
     
+    public void eat(){
+        manager.eat();
+        gui.updateCatStats();
+    }
+    
+    public void sleep(){
+        manager.sleep();
+        gui.updateCatStats();
+    }
+    
+    public void run(){
+        gui.setVisible(true);
+    }
     
     /*
     return a new cat from the cat factory
