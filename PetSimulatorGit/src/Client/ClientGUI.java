@@ -5,49 +5,43 @@
  */
 package Client;
 //test
+import cats.Cat;
+import interactions.CatManager;
 import java.awt.Color;
-import static java.awt.Color.cyan;
 import static java.awt.Color.white;
 import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.GraphicsEnvironment;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedInputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import javafx.scene.layout.Border;
 import javax.swing.BorderFactory;
-import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import javax.swing.event.ListSelectionListener;
 
 /**
  *
  * @author Ashley ddb1062
  */
 public class ClientGUI extends JFrame {
-
+    VirtualPetClient client;
     String screen = "Main menu";
 
-    public ClientGUI(String title) {
+    public ClientGUI(String title, VirtualPetClient vpc) {
         super(title);
+        client = vpc;
 
         getContentPane().setLayout(null);
         setSize(684, 701);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(false);
-        JLabel image1 = new JLabel(new ImageIcon("src/GUI/capture.PNG"));
+        JLabel image1 = new JLabel(new ImageIcon("images/catOnRoof.JPEG"));
         //Art by JOOJAEBUM https://www.behance.net/gallery/87142777/Cat-on-the-Rooftop-Pixel-Art
         setContentPane(image1);
 
@@ -136,7 +130,7 @@ public class ClientGUI extends JFrame {
 
                     if (selected == 0) {
                         //go to my cats
-                        image1.setIcon(new ImageIcon("src/GUI/catBackground.jpg"));
+                        image1.setIcon(new ImageIcon("images/catBackground.jpg"));
                         // https://i.pinimg.com/originals/db/6f/e1/db6fe1a6cb7827e6685f6d5eb46e6a83.jpg artwork from.
                         screen = "cats";
                         welcome.setText("My Cats");
@@ -144,7 +138,8 @@ public class ClientGUI extends JFrame {
                         menu.setVisible(false);
                         button.setLocation(375, 300);
                         myCats.setLocation(275, 300);
-                        System.out.println(screen);
+                        client.getMyCats();
+                        //TODO: implement showing cats in gui, select cat from menu
 
                     } else if (selected == 1) {
                         //go to shelter
@@ -161,6 +156,7 @@ public class ClientGUI extends JFrame {
                     selected = shelter.getSelectedIndex();
 
                     if (selected == 0) {
+                        //TODO 
                         //go to adopt
                         System.out.println("here");
                         welcome.setText("Adopt a Cat");
@@ -175,6 +171,7 @@ public class ClientGUI extends JFrame {
                         stats.setVisible(true);
 
                     } else if (selected == 1) {
+                        //TODO
                         //go to home screen
                         image1.setIcon(new ImageIcon("src/GUI/capture.PNG"));
                         menu.setVisible(true);
@@ -187,12 +184,15 @@ public class ClientGUI extends JFrame {
                     selected = adopt.getSelectedIndex();
                     // show info in stats JTextField
                     if (selected == 0) {
+                        //TODO
                         //add cat to collection
 
                     } else if (selected == 1) {
+                        //TODO
                         //present another cat's info in stats JTextField
 
                     } else if (selected == 2) {
+                        //TODO
                         //go to home screen
                         image1.setIcon(new ImageIcon("src/GUI/capture.PNG"));
                         menu.setVisible(true);
@@ -235,10 +235,9 @@ public class ClientGUI extends JFrame {
         }
         );
     }
-
-    public static void main(String args[]) {
-        JFrame frame = new ClientGUI("Virtual Cat");
-        frame.setVisible(true);
+    
+    public void updateCatStats(){
+        Cat current = client.getCat();
+        //TODO: print cat elements onto gui
     }
-
 }

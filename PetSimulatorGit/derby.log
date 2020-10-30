@@ -1,92 +1,13 @@
-Fri Oct 30 13:31:35 NZDT 2020 : Apache Derby Network Server - 10.14.2.0 - (1828579) started and ready to accept connections on port 1527
-Fri Oct 30 13:31:35 NZDT 2020 Thread[DRDAConnThread_2,5,main] Cleanup action starting
-java.sql.SQLException: Database 'PetDB' not found.
-	at org.apache.derby.impl.jdbc.SQLExceptionFactory.getSQLException(Unknown Source)
-	at org.apache.derby.impl.jdbc.SQLExceptionFactory.getSQLException(Unknown Source)
-	at org.apache.derby.impl.jdbc.Util.generateCsSQLException(Unknown Source)
-	at org.apache.derby.impl.jdbc.Util.generateCsSQLException(Unknown Source)
-	at org.apache.derby.impl.jdbc.EmbedConnection.newSQLException(Unknown Source)
-	at org.apache.derby.impl.jdbc.EmbedConnection.handleDBNotFound(Unknown Source)
-	at org.apache.derby.impl.jdbc.EmbedConnection.<init>(Unknown Source)
-	at org.apache.derby.jdbc.InternalDriver$1.run(Unknown Source)
-	at org.apache.derby.jdbc.InternalDriver$1.run(Unknown Source)
-	at java.security.AccessController.doPrivileged(Native Method)
-	at org.apache.derby.jdbc.InternalDriver.getNewEmbedConnection(Unknown Source)
-	at org.apache.derby.jdbc.InternalDriver.connect(Unknown Source)
-	at org.apache.derby.jdbc.InternalDriver.connect(Unknown Source)
-	at org.apache.derby.jdbc.EmbeddedDriver.connect(Unknown Source)
-	at org.apache.derby.impl.drda.Database.makeConnection(Unknown Source)
-	at org.apache.derby.impl.drda.DRDAConnThread.getConnFromDatabaseName(Unknown Source)
-	at org.apache.derby.impl.drda.DRDAConnThread.verifyUserIdPassword(Unknown Source)
-	at org.apache.derby.impl.drda.DRDAConnThread.parseSECCHK(Unknown Source)
-	at org.apache.derby.impl.drda.DRDAConnThread.parseDRDAConnection(Unknown Source)
-	at org.apache.derby.impl.drda.DRDAConnThread.processCommands(Unknown Source)
-	at org.apache.derby.impl.drda.DRDAConnThread.run(Unknown Source)
-Caused by: ERROR XJ004: Database 'PetDB' not found.
-	at org.apache.derby.iapi.error.StandardException.newException(Unknown Source)
-	at org.apache.derby.impl.jdbc.SQLExceptionFactory.wrapArgsForTransportAcrossDRDA(Unknown Source)
-	... 21 more
-============= begin nested exception, level (1) ===========
-ERROR XJ004: Database 'PetDB' not found.
-	at org.apache.derby.iapi.error.StandardException.newException(Unknown Source)
-	at org.apache.derby.impl.jdbc.SQLExceptionFactory.wrapArgsForTransportAcrossDRDA(Unknown Source)
-	at org.apache.derby.impl.jdbc.SQLExceptionFactory.getSQLException(Unknown Source)
-	at org.apache.derby.impl.jdbc.SQLExceptionFactory.getSQLException(Unknown Source)
-	at org.apache.derby.impl.jdbc.Util.generateCsSQLException(Unknown Source)
-	at org.apache.derby.impl.jdbc.Util.generateCsSQLException(Unknown Source)
-	at org.apache.derby.impl.jdbc.EmbedConnection.newSQLException(Unknown Source)
-	at org.apache.derby.impl.jdbc.EmbedConnection.handleDBNotFound(Unknown Source)
-	at org.apache.derby.impl.jdbc.EmbedConnection.<init>(Unknown Source)
-	at org.apache.derby.jdbc.InternalDriver$1.run(Unknown Source)
-	at org.apache.derby.jdbc.InternalDriver$1.run(Unknown Source)
-	at java.security.AccessController.doPrivileged(Native Method)
-	at org.apache.derby.jdbc.InternalDriver.getNewEmbedConnection(Unknown Source)
-	at org.apache.derby.jdbc.InternalDriver.connect(Unknown Source)
-	at org.apache.derby.jdbc.InternalDriver.connect(Unknown Source)
-	at org.apache.derby.jdbc.EmbeddedDriver.connect(Unknown Source)
-	at org.apache.derby.impl.drda.Database.makeConnection(Unknown Source)
-	at org.apache.derby.impl.drda.DRDAConnThread.getConnFromDatabaseName(Unknown Source)
-	at org.apache.derby.impl.drda.DRDAConnThread.verifyUserIdPassword(Unknown Source)
-	at org.apache.derby.impl.drda.DRDAConnThread.parseSECCHK(Unknown Source)
-	at org.apache.derby.impl.drda.DRDAConnThread.parseDRDAConnection(Unknown Source)
-	at org.apache.derby.impl.drda.DRDAConnThread.processCommands(Unknown Source)
-	at org.apache.derby.impl.drda.DRDAConnThread.run(Unknown Source)
-============= end nested exception, level (1) ===========
-Cleanup action completed
-Fri Oct 30 13:31:35 NZDT 2020 Thread[DRDAConnThread_2,5,main] (DATABASE = PetDB), (DRDAID = {1}), Database 'PetDB' not found.
 ----------------------------------------------------------------
-Fri Oct 30 13:32:14 NZDT 2020:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0175-76ea-b8d8-00000477f007 
-on database directory C:\Users\Oscar\OneDrive - AUT University\PDC\PetSimulator\PetSimulatorGit\PetDB with class loader sun.misc.Launcher$AppClassLoader@1d44bcfa 
-Loaded from file:/D:/Projects/Database/JavaDB/db-derby-10.14.2.0-bin/lib/derby.jar
+Fri Oct 30 16:33:30 NZDT 2020:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0175-7791-4388-00000e8a3798 
+on database directory C:\Users\Oscar\OneDrive - AUT University\PDC\PetSimulator\PetSimulatorGit\PetDB with class loader sun.misc.Launcher$AppClassLoader@5c647e05 
+Loaded from file:/C:/Users/Oscar/OneDrive%20-%20AUT%20University/PDC/PetSimulator/PetSimulatorGit/lib/derby.jar
 java.vendor=Oracle Corporation
 java.runtime.version=1.8.0_241-b07
-user.dir=D:\Projects\Database\JavaDB\db-derby-10.14.2.0-bin
+user.dir=C:\Users\Oscar\OneDrive - AUT University\PDC\PetSimulator\PetSimulatorGit
 os.name=Windows 10
 os.arch=amd64
 os.version=10.0
-derby.system.home=C:\Users\Oscar\OneDrive - AUT University\PDC\PetSimulator\PetSimulatorGit
+derby.system.home=null
 Database Class Loader started - derby.database.classpath=''
-----------------------------------------------------------------
-Fri Oct 30 13:32:15 NZDT 2020:
-Shutting down instance a816c00e-0175-76ea-b8d8-00000477f007 on database directory C:\Users\Oscar\OneDrive - AUT University\PDC\PetSimulator\PetSimulatorGit\PetDB with class loader sun.misc.Launcher$AppClassLoader@1d44bcfa 
-Fri Oct 30 13:32:15 NZDT 2020 Thread[DRDAConnThread_2,5,main] (DATABASE = PetDB), (DRDAID = {3}), Database 'PetDB' shutdown.
-----------------------------------------------------------------
-Fri Oct 30 13:32:26 NZDT 2020:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance 6ede40af-0175-76ea-b8d8-00000477f007 
-on database directory C:\Users\Oscar\OneDrive - AUT University\PDC\PetSimulator\PetSimulatorGit\PetDB with class loader sun.misc.Launcher$AppClassLoader@1d44bcfa 
-Loaded from file:/D:/Projects/Database/JavaDB/db-derby-10.14.2.0-bin/lib/derby.jar
-java.vendor=Oracle Corporation
-java.runtime.version=1.8.0_241-b07
-user.dir=D:\Projects\Database\JavaDB\db-derby-10.14.2.0-bin
-os.name=Windows 10
-os.arch=amd64
-os.version=10.0
-derby.system.home=C:\Users\Oscar\OneDrive - AUT University\PDC\PetSimulator\PetSimulatorGit
-Database Class Loader started - derby.database.classpath=''
-----------------------------------------------------------------
-Fri Oct 30 14:46:40 NZDT 2020: Shutting down Derby engine
-----------------------------------------------------------------
-Fri Oct 30 14:46:40 NZDT 2020:
-Shutting down instance 6ede40af-0175-76ea-b8d8-00000477f007 on database directory C:\Users\Oscar\OneDrive - AUT University\PDC\PetSimulator\PetSimulatorGit\PetDB with class loader sun.misc.Launcher$AppClassLoader@1d44bcfa 
-----------------------------------------------------------------
